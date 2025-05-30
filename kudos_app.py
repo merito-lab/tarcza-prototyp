@@ -535,7 +535,7 @@ def login_page():
             
             st.success("✅ Autoryzacja Google zakończona pomyślnie!")
             st.session_state.google_authorized = True
-            st.experimental_rerun()
+            st.rerun()
     
     # Jeśli użytkownik jest "autoryzowany" przez Google
     if st.session_state.get("google_authorized", False):
@@ -618,7 +618,7 @@ def login_page():
                     st.session_state.current_context = user["role"]
                     st.session_state.google_authorized = False  # Reset
                     st.success(f"Zalogowano jako {user['name']} ({user['role']})")
-                    st.experimental_rerun()
+                    st.rerun()
     
     # Footer w stylu Material-UI
     if not st.session_state.get("google_authorized", False):
@@ -686,7 +686,7 @@ def context_selection():
             icon = context_icons.get(context, "🎭")
             if st.button(f"{icon} {context}", key=f"context_{i}", use_container_width=True):
                 st.session_state.current_context = context
-                st.experimental_rerun()
+                st.rerun()
     
     with col2:
         # Informacje o kontekstach - czyste
@@ -718,7 +718,7 @@ def main_menu():
         st.session_state.logged_in = False
         st.session_state.current_user = None
         st.session_state.current_context = None
-        st.experimental_rerun()
+        st.rerun()
     
     st.sidebar.markdown("---")
     
@@ -848,7 +848,7 @@ def kudos_module():
                 }
                 st.session_state.kudos.append(new_kudos)
                 st.success(f"🎉 Kudos dla {recipient} za {value} został przyznany!")
-                st.experimental_rerun()
+                st.rerun()
     
     with tab2:
         st.header("Historia Kudosów")
@@ -1001,7 +1001,7 @@ def mam_wplyw_program():
                 }
                 st.session_state.initiatives.append(new_initiative)
                 st.success(f"✅ Inicjatywa '{title}' została zgłoszona!")
-                st.experimental_rerun()
+                st.rerun()
     
     with tab2:
         st.header("Wszystkie inicjatywy")
@@ -1027,7 +1027,7 @@ def mam_wplyw_program():
                                 if initiative['id'] == init['id']:
                                     st.session_state.initiatives[i]['votes'] += 1
                                     break
-                            st.experimental_rerun()
+                            st.rerun()
                         
                         if st.session_state.current_context == "Koordynator programu Mam wpływ":
                             status_options = ["Nowa", "W ocenie", "Zaakceptowana", "W realizacji", "Zrealizowana", "Odrzucona"]
@@ -1040,7 +1040,7 @@ def mam_wplyw_program():
                                         st.session_state.initiatives[i]['status'] = new_status
                                         break
                                 st.success("Status zaktualizowany!")
-                                st.experimental_rerun()
+                                st.rerun()
         else:
             st.info("Brak zgłoszonych inicjatyw. Bądź pierwszy!")
     
